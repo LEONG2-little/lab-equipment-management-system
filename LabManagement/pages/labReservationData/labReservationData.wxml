@@ -1,0 +1,38 @@
+<!--pages/labReservationData/labReservationData.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="device-detail-container">
+  <!-- 设备列表 -->
+  <view class="device-card">
+
+    <view class="info-item">
+      <text class="info-label">实验室名称：</text>
+      <text class="info-value">{{labDetail.laboratory_name || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">实验室地点：</text>
+      <text class="info-value">{{labDetail.location || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">描述：</text>
+      <text class="info-value">{{labDetail.description || '未分类'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">其中的设备：</text>
+      <text class="info-value">{{deviceNames || '加载中...'}}</text>
+    </view>
+  </view>
+
+  <view class="action-area">
+    <button class="borrow-btn" bindtap="toSelectReservationTime">预约该实验室</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

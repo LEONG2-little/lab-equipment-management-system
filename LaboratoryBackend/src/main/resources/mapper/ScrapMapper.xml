@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.ScrapMapper">
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Scrap">
+    <id column="scrap_id" jdbcType="INTEGER" property="scrap_id" />
+    <result column="manager_id" jdbcType="INTEGER" property="manager_id" />
+    <result column="device_id" jdbcType="INTEGER" property="device_id" />
+    <result column="approver_id" jdbcType="INTEGER" property="approver_id" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="approver_reason" jdbcType="VARCHAR" property="approver_reason" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="created_at" />
+    <result column="approved_at" jdbcType="TIMESTAMP" property="approved_at" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    scrap_id, manager_id, device_id, approver_id, reason, approver_reason, status, created_at, 
+    approved_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scrap
+    where scrap_id = #{scrap_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scrap
+    where scrap_id = #{scrap_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Scrap">
+    insert into scrap (scrap_id, manager_id, device_id, 
+      approver_id, reason, approver_reason, 
+      status, created_at, approved_at
+      )
+    values (#{scrap_id,jdbcType=INTEGER}, #{manager_id,jdbcType=INTEGER}, #{device_id,jdbcType=INTEGER}, 
+      #{approver_id,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, #{approver_reason,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP}, #{approved_at,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Scrap">
+    insert into scrap
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scrap_id != null">
+        scrap_id,
+      </if>
+      <if test="manager_id != null">
+        manager_id,
+      </if>
+      <if test="device_id != null">
+        device_id,
+      </if>
+      <if test="approver_id != null">
+        approver_id,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="approver_reason != null">
+        approver_reason,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created_at != null">
+        created_at,
+      </if>
+      <if test="approved_at != null">
+        approved_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scrap_id != null">
+        #{scrap_id,jdbcType=INTEGER},
+      </if>
+      <if test="manager_id != null">
+        #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="device_id != null">
+        #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="approver_id != null">
+        #{approver_id,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approver_reason != null">
+        #{approver_reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null">
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approved_at != null">
+        #{approved_at,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Scrap">
+    update scrap
+    <set>
+      <if test="manager_id != null">
+        manager_id = #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="device_id != null">
+        device_id = #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="approver_id != null">
+        approver_id = #{approver_id,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approver_reason != null">
+        approver_reason = #{approver_reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null">
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approved_at != null">
+        approved_at = #{approved_at,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where scrap_id = #{scrap_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Scrap">
+    update scrap
+    set manager_id = #{manager_id,jdbcType=INTEGER},
+      device_id = #{device_id,jdbcType=INTEGER},
+      approver_id = #{approver_id,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      approver_reason = #{approver_reason,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{created_at,jdbcType=TIMESTAMP},
+      approved_at = #{approved_at,jdbcType=TIMESTAMP}
+    where scrap_id = #{scrap_id,jdbcType=INTEGER}
+  </update>
+
+<!--  Scrap selectScrap(Integer device_id);-->
+  <select id="selectScrap" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from scrap
+    where device_id = #{device_id,jdbcType=INTEGER} and status = '处理中'
+  </select>
+</mapper>

@@ -1,0 +1,42 @@
+<!--pages/deviceFaultHandling/deviceFaultHandling.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 设备列表 -->
+    <view class="device-list">
+      <view wx:if="{{deviceFaultArr.length > 0}}">
+        <view wx:for="{{deviceFaultArr}}" wx:key="device_id" data-index="{{index}}" bindtap="toDeviceFaultDetail" class="device-item">
+
+          <view class="device-info">
+            <view class="info-row">
+              <text class="label">名称：</text>
+              <text class="value">{{item.device_name || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">地点：</text>
+              <text class="value">{{item.location || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">状态：</text>
+              <text class="value">{{item.status || '未知'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text>暂无故障设备</text>
+      </view>
+    </view>
+
+    <!-- 自定义底部导航栏 -->
+    <custom-tabbar current="4"></custom-tabbar>
+
+    <!-- 给底部栏留出空间 -->
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

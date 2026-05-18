@@ -1,0 +1,74 @@
+<!--pages/changeLab/changeLab.wxml-->
+<view class="change-status-container">
+  <!-- 实验室信息 -->
+  <view class="lab-card">
+    <view class="info-item">
+      <text class="info-label">实验室名称：</text>
+      <text class="info-value">{{labData.lab_name || labData.location || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">当前状态：</text>
+      <text class="info-value">{{labData.status || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">实验室位置：</text>
+      <text class="info-value">{{labData.location || '未知'}}</text>
+    </view>
+
+    <!-- 可编辑的实验室描述 -->
+    <view class="info-item">
+      <text class="info-label">实验室描述：</text>
+      <view class="info-value">
+        <textarea 
+          placeholder="请输入实验室描述" 
+          value="{{labDescription}}" 
+          bindinput="onDescriptionInput" 
+          class="description-textarea" 
+          auto-height 
+          maxlength="200"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 状态选择 -->
+  <view class="lab-card">
+    <view class="info-item">
+      <text class="info-label">修改状态为：</text>
+      <view class="picker-container info-value">
+        <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(changeStatus)}}" range="{{statusOptions}}">
+          <view class="picker-selector">
+            {{changeStatus}} <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 故障原因输入框 -->
+    <view class="info-item" wx:if="{{ changeStatus == '故障' && labData.status !== '故障'}}">
+      <text class="info-label">故障原因：</text>
+      <view class="info-value">
+        <textarea 
+          placeholder="请填写故障原因" 
+          value="{{faultReason}}" 
+          bindinput="onFaultReasonInput" 
+          class="fault-textarea" 
+          auto-height 
+          maxlength="200"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class="action-area">
+    <button class="confirm-btn" bindtap="confirmChange">确认修改</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

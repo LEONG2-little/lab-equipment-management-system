@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.AnnouncementMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    <id column="announcement_id" property="announcement_id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image_url" property="image_url" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publish_time" jdbcType="TIMESTAMP" />
+    <result column="is_top" property="is_top" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.laboratorybackend.laboratorybackend.domain.Announcement" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    announcement_id, title, image_url, publish_time, is_top
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from announcement
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from announcement
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    insert into announcement (announcement_id, title, image_url, 
+      publish_time, is_top, content
+      )
+    values (#{announcement_id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{image_url,jdbcType=VARCHAR}, 
+      #{publish_time,jdbcType=TIMESTAMP}, #{is_top,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    insert into announcement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="announcement_id != null" >
+        announcement_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="image_url != null" >
+        image_url,
+      </if>
+      <if test="publish_time != null" >
+        publish_time,
+      </if>
+      <if test="is_top != null" >
+        is_top,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="announcement_id != null" >
+        #{announcement_id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="image_url != null" >
+        #{image_url,jdbcType=VARCHAR},
+      </if>
+      <if test="publish_time != null" >
+        #{publish_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_top != null" >
+        #{is_top,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    update announcement
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="image_url != null" >
+        image_url = #{image_url,jdbcType=VARCHAR},
+      </if>
+      <if test="publish_time != null" >
+        publish_time = #{publish_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_top != null" >
+        is_top = #{is_top,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    update announcement
+    set title = #{title,jdbcType=VARCHAR},
+      image_url = #{image_url,jdbcType=VARCHAR},
+      publish_time = #{publish_time,jdbcType=TIMESTAMP},
+      is_top = #{is_top,jdbcType=BIT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Announcement" >
+    update announcement
+    set title = #{title,jdbcType=VARCHAR},
+      image_url = #{image_url,jdbcType=VARCHAR},
+      publish_time = #{publish_time,jdbcType=TIMESTAMP},
+      is_top = #{is_top,jdbcType=BIT}
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </update>
+
+  <!-- List<Announcement> getAllAnnouncement(); -->
+  <select id="getAllAnnouncement" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from announcement
+    order by is_top desc, publish_time desc
+  </select>
+
+  <!-- List<Announcement> getTopAnnouncements(); -->
+  <select id="getTopAnnouncements" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from announcement
+    where is_top = 1
+    order by publish_time desc
+  </select>
+
+  <!-- List<Announcement> getNormalAnnouncements(); -->
+  <select id="getNormalAnnouncements" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from announcement
+    where is_top = 0 or is_top is null
+    order by publish_time desc
+  </select>
+
+  <!-- int updateTopStatus(@Param("announcement_id") Integer announcement_id, @Param("is_top") Boolean is_top); -->
+  <update id="updateTopStatus">
+    update announcement
+    set is_top = #{is_top,jdbcType=BIT}
+    where announcement_id = #{announcement_id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,46 @@
+<!-- pages/announcementDetail/announcementDetail.wxml -->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-container">
+  <!-- 公告详情卡片 -->
+  <view class="detail-card" wx:if="{{announcementDetailArr}}">
+    
+    <!-- 标题区域 -->
+    <view class="title-section">
+      <view class="title-row">
+        <text class="title">{{announcementDetailArr.title}}</text>
+      </view>
+      <text class="publish-time">{{utils.formatDateTime(announcementDetailArr.publish_time)}}</text>
+    </view>
+
+    <!-- 图片区域 -->
+    <view class="image-section" wx:if="{{image_url}}">
+      <image 
+        src="{{image_url}}" 
+        mode="widthFix" 
+        class="detail-image" 
+        bindtap="previewImage"
+      />
+      <view class="preview-tip">
+        <text class="preview-tip-text">点击图片放大查看</text>
+      </view>
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider"></view>
+
+    <!-- 内容区域 -->
+    <view class="content-section">
+      <text class="content">{{announcementDetailArr.content}}</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <view class="empty-icon">📄</view>
+    <text class="empty-text">公告不存在或已被删除</text>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="2"></custom-tabbar>
+</view>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Permission" >
+    <id column="permission_id" property="permission_id" jdbcType="INTEGER" />
+    <result column="permission_level" property="permission_level" jdbcType="INTEGER" />
+    <result column="max_reserve_days" property="max_reserve_days" jdbcType="INTEGER" />
+    <result column="max_concurrent_devices" property="max_concurrent_devices" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    permission_id, permission_level, max_reserve_days, max_concurrent_devices, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where permission_id = #{permission_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where permission_id = #{permission_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Permission" >
+    insert into permission (permission_id, permission_level, 
+      max_reserve_days, max_concurrent_devices, 
+      description)
+    values (#{permission_id,jdbcType=INTEGER}, #{permission_level,jdbcType=INTEGER}, 
+      #{max_reserve_days,jdbcType=INTEGER}, #{max_concurrent_devices,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permission_id != null" >
+        permission_id,
+      </if>
+      <if test="permission_level != null" >
+        permission_level,
+      </if>
+      <if test="max_reserve_days != null" >
+        max_reserve_days,
+      </if>
+      <if test="max_concurrent_devices != null" >
+        max_concurrent_devices,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permission_id != null" >
+        #{permission_id,jdbcType=INTEGER},
+      </if>
+      <if test="permission_level != null" >
+        #{permission_level,jdbcType=INTEGER},
+      </if>
+      <if test="max_reserve_days != null" >
+        #{max_reserve_days,jdbcType=INTEGER},
+      </if>
+      <if test="max_concurrent_devices != null" >
+        #{max_concurrent_devices,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Permission" >
+    update permission
+    <set >
+      <if test="permission_level != null" >
+        permission_level = #{permission_level,jdbcType=INTEGER},
+      </if>
+      <if test="max_reserve_days != null" >
+        max_reserve_days = #{max_reserve_days,jdbcType=INTEGER},
+      </if>
+      <if test="max_concurrent_devices != null" >
+        max_concurrent_devices = #{max_concurrent_devices,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where permission_id = #{permission_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Permission" >
+    update permission
+    set permission_level = #{permission_level,jdbcType=INTEGER},
+      max_reserve_days = #{max_reserve_days,jdbcType=INTEGER},
+      max_concurrent_devices = #{max_concurrent_devices,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where permission_id = #{permission_id,jdbcType=INTEGER}
+  </update>
+</mapper>

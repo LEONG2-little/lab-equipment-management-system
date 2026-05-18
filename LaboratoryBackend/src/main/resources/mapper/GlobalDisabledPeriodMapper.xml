@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.GlobalDisabledPeriodMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.GlobalDisabledPeriod" >
+    <id column="disable_id" property="disable_id" jdbcType="INTEGER" />
+    <result column="start_time" property="start_time" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="end_time" jdbcType="TIMESTAMP" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="created_by" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    disable_id, start_time, end_time, reason, created_at, created_by, status
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from global_disabled_period
+    where disable_id = #{disable_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from global_disabled_period
+    where disable_id = #{disable_id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.GlobalDisabledPeriod" >
+    insert into global_disabled_period (disable_id, start_time, end_time,
+                                        reason, created_at,
+                                        created_by, status)
+    values (#{disable_id,jdbcType=INTEGER}, #{start_time,jdbcType=TIMESTAMP}, #{end_time,jdbcType=TIMESTAMP},
+            #{reason,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP},
+            #{created_by,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.GlobalDisabledPeriod" >
+    insert into global_disabled_period
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="disable_id != null" >
+        disable_id,
+      </if>
+      <if test="start_time != null" >
+        start_time,
+      </if>
+      <if test="end_time != null" >
+        end_time,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="created_at != null" >
+        created_at,
+      </if>
+      <if test="created_by != null" >
+        created_by,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="disable_id != null" >
+        #{disable_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <!-- 删除 type 的赋值 -->
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created_by != null" >
+        #{created_by,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.GlobalDisabledPeriod" >
+    update global_disabled_period
+    <set >
+      <if test="start_time != null" >
+        start_time = #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        end_time = #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <!-- 删除 type 的更新 -->
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created_by != null" >
+        created_by = #{created_by,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where disable_id = #{disable_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.GlobalDisabledPeriod" >
+    update global_disabled_period
+    set start_time = #{start_time,jdbcType=TIMESTAMP},
+    end_time = #{end_time,jdbcType=TIMESTAMP},
+    reason = #{reason,jdbcType=VARCHAR},
+    created_at = #{created_at,jdbcType=TIMESTAMP},
+    created_by = #{created_by,jdbcType=INTEGER},
+    status = #{status,jdbcType=VARCHAR}
+    where disable_id = #{disable_id,jdbcType=INTEGER}
+  </update>
+
+  <!--  List<GlobalDisabledPeriod> selectAll(); -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from global_disabled_period
+  </select>
+
+  <!--  List<GlobalDisabledPeriod> selectByExecute(); -->
+  <select id="selectByExecute" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from global_disabled_period
+    where status = '执行中'
+  </select>
+</mapper>

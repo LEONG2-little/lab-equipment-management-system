@@ -1,0 +1,211 @@
+/* pages/selectReservationTime/selectReservationTime.wxss */
+.container {
+  padding: 20rpx;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+.date-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 20rpx;
+  width: 94%;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-left: 10rpx;
+  border-left: 6rpx solid #409eff;
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20rpx;
+}
+
+.date-item {
+  background-color: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 12rpx;
+  padding: 20rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.date-item.selected {
+  background-color: #409eff;
+  border-color: #409eff;
+}
+
+.date-item.selected .date-week,
+.date-item.selected .date-day,
+.date-item.selected .date-month {
+  color: #fff;
+}
+
+.date-item.disabled {
+  background-color: #f1f3f5;
+  border-color: #dee2e6;
+  opacity: 0.5;
+}
+
+.date-week {
+  font-size: 24rpx;
+  color: #868e96;
+  margin-bottom: 8rpx;
+}
+
+.date-day {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 4rpx;
+}
+
+.date-month {
+  font-size: 22rpx;
+  color: #adb5bd;
+}
+
+.time-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 20rpx;
+  width: 94%;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+
+.time-item {
+  background-color: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 12rpx;
+  padding: 20rpx 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.time-item.selected {
+  background-color: #409eff;
+  border-color: #409eff;
+}
+
+.time-item.selected .time-label {
+  color: #fff;
+}
+
+.time-item.disabled {
+  background-color: #f1f3f5;
+  border-color: #f56c6c;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.time-item.disabled .time-label {
+  color: #f56c6c;
+}
+
+.time-label {
+  font-size: 26rpx;
+  color: #495057;
+  font-weight: 500;
+}
+
+.selected-count {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #409eff;
+  text-align: right;
+}
+
+.purpose-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 20rpx;
+  width: 94%;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.purpose-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  border: 2rpx solid #e9ecef;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.purpose-input:focus {
+  border-color: #409eff;
+}
+
+.limit-tip {
+  background-color: #e3f2fd;
+  border-left: 6rpx solid #2196f3;
+  padding: 20rpx;
+  margin: 20rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  width: 94%;
+  box-sizing: border-box;
+}
+
+.confirm-btn-container {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.confirm-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #07c160 0%, #06a850 100%);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4rpx 12rpx rgba(7, 193, 96, 0.3);
+  transition: all 0.3s ease;
+}
+
+.confirm-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 6rpx rgba(7, 193, 96, 0.2);
+}
+
+.confirm-btn.disabled {
+  background: #cccccc;
+  box-shadow: none;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.tabbar-placeholder {
+  height: 120rpx;
+}

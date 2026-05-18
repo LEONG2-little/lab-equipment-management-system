@@ -1,0 +1,39 @@
+<!--pages/myReservation/myReservation.wxml-->
+<view class="reservation-container">
+  <view wx:if="{{reservationArr.length>0}}">
+    <view wx:for="{{reservationArr}}" wx:key="reservation_id" data-index="{{index}}" class="reservation-item">
+
+      <view class="info-area" bindtap="toReservationDetail" data-index="{{index}}">
+        <view class="info-item">
+          <text class="label">设备名称：</text>
+          <text class="value">{{item.device_detail.device_name}}</text>
+        </view>
+
+        <view class="info-item">
+          <text class="label">使用用途：</text>
+          <text class="value">{{item.purpose}}</text>
+        </view>
+
+        <view class="info-item">
+          <text class="label">状态：</text>
+          <text class="value">{{item.status}}</text>
+        </view>
+      </view>
+
+      <view class="button-area">
+        <button class="return-btn" bindtap="returnDevice" data-index="{{index}}">取消预约</button>
+      </view>
+
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    <text>暂无预约信息</text>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

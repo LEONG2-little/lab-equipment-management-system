@@ -1,0 +1,125 @@
+/* pages/announcementDetail/announcementDetail.wxss */
+.page-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 24rpx;
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
+
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+  margin-bottom: 24rpx;
+}
+
+.title-section {
+  margin-bottom: 24rpx;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.top-badge {
+  background-color: #e6a23c;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.top-badge-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.4;
+  word-break: break-word;
+  flex: 1;
+}
+
+.publish-time {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #909399;
+  background-color: #f5f7fa;
+  padding: 8rpx 20rpx;
+  border-radius: 40rpx;
+}
+
+.image-section {
+  margin: 24rpx 0 16rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background-color: #f5f7fa;
+  border: 2rpx solid #ebeef5;
+}
+
+.detail-image {
+  width: 100%;
+  display: block;
+}
+
+.preview-tip {
+  padding: 16rpx 0;
+  text-align: center;
+  background-color: #fafafa;
+  border-top: 1rpx solid #ebeef5;
+}
+
+.preview-tip-text {
+  font-size: 24rpx;
+  color: #909399;
+}
+
+.divider {
+  height: 2rpx;
+  background-color: #e4e7ed;
+  margin: 24rpx 0 20rpx;
+}
+
+.content-section {
+  margin-top: 8rpx;
+}
+
+.content {
+  display: block;
+  font-size: 30rpx;
+  color: #3c4a5a;
+  line-height: 1.8;
+  word-break: break-word;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 60rpx;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #909399;
+}

@@ -1,0 +1,24 @@
+<!-- components/custom-tabbar/custom-tabbar.wxml -->
+<view class="custom-tabbar">
+  <view class="tab-item {{index === current ? 'active' : ''}}" wx:for="{{tabList}}" wx:key="index" data-index="{{index}}" bindtap="switchTab">
+    <view class="icon">
+      <!-- 首页图标 - 没有红点包装 -->
+      <text class="icon-text" wx:if="{{item.icon === 'home'}}">🏠</text>
+      
+      <!-- 消息图标 - 单独用 icon-wrapper 包裹，只在这里显示红点 -->
+      <view wx:if="{{item.icon === 'message'}}" class="icon-wrapper">
+        <text class="icon-text">💬</text>
+        <!-- 红点只在这里显示 -->
+        <view class="badge" wx:if="{{unreadCount > 0}}">
+          <text class="badge-text">{{unreadCount > 99 ? '99+' : unreadCount}}</text>
+        </view>
+      </view>
+
+      <text class="icon-text" wx:if="{{item.icon === 'announcement'}}">📋</text>
+      
+      <!-- 个人图标 - 没有红点包装 -->
+      <text class="icon-text" wx:if="{{item.icon === 'personal'}}">👤</text>
+    </view>
+    <text class="text">{{item.text}}</text>
+  </view>
+</view>

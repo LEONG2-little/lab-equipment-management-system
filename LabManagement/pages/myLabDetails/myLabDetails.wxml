@@ -1,0 +1,62 @@
+<!--pages/myLabDetails/myLabDetails.wxml-->
+<view class="change-status-container">
+  <!-- 实验室信息 -->
+  <view class="lab-card">
+    <view class="info-item">
+      <text class="info-label">实验室名称：</text>
+      <text class="info-value">{{labData.laboratory_name || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">实验室地点：</text>
+      <text class="info-value">{{labData.location || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">当前状态：</text>
+      <text class="info-value">{{labData.status || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">实验室位置：</text>
+      <text class="info-value">{{labData.location || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">实验室描述：</text>
+      <text class="info-value">{{labData.description || '未知'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">其中的设备：</text>
+      <text class="info-value">{{deviceNames || '加载中...'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">开放机时：</text>
+      <text class="info-value">{{openTimesText}}</text>
+    </view>
+  </view>
+
+  <view class="action-area">
+    <button class="confirm-btn" bindtap="toChangeLab">修改信息</button>
+  </view>
+
+  <view class="action-area" wx:if="{{ openTimesText == '暂无' }}">
+    <button class="confirm-btn" bindtap="toSelectLabOpenTime">开放机时</button>
+  </view>
+
+  <view class="action-area" wx:if="{{ changeStatus == '空闲' }}">
+    <button class="confirm-btn" bindtap="disableLabOpenTime">停止开放机时</button>
+  </view>
+
+  <view class="action-area" wx:if="{{ openTimesText !== '暂无' }}">
+    <button class="confirm-btn" bindtap="toUpdataLabOpenTime">修改开放机时</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

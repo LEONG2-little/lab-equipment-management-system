@@ -1,0 +1,33 @@
+
+function formatTime(dateStr) {
+  if (!dateStr) return '';
+  var date = getDate(dateStr);
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  return month + '月' + day + '日';
+}
+
+function formatDateTime(dateStr) {
+  if (!dateStr) return '';
+  var date = getDate(dateStr);
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  
+  // 补零函数
+  function padZero(num) {
+    return num < 10 ? '0' + num : num;
+  }
+  
+  return month + '月' + day + '日 ' + 
+         padZero(hours) + ':' + 
+         padZero(minutes) + ':' + 
+         padZero(seconds);
+}
+
+module.exports = {
+  formatTime: formatTime,
+  formatDateTime:formatDateTime
+}

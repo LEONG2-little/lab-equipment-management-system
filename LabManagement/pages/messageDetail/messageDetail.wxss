@@ -1,0 +1,79 @@
+/* pages/messageDetail/messageDetail.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+
+.detail-content {
+  width: 95%;
+  padding: 0;
+  margin: 0;
+}
+
+.title-section {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  word-break: break-word;
+  padding: 40rpx 0 20rpx 0;
+  margin: 0;
+  width: 100%;
+}
+
+.time-section {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.time {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  padding: 0 0 30rpx 0; 
+  margin: 0;
+  width: 100%;
+}
+
+.divider {
+  height: 2rpx;
+  background-color: #6b6b6b;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.content-section {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  display: block;
+  font-size: 32rpx;
+  color: #666;
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 30rpx 0;
+  margin: 0;
+  width: 100%;
+}
+
+.tabbar-placeholder {
+  height: 120rpx;
+  width: 100%;
+}

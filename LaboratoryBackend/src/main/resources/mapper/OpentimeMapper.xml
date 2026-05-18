@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.OpentimeMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Opentime" >
+    <id column="openTime_id" property="openTime_id" jdbcType="INTEGER" />
+    <result column="week" property="week" jdbcType="VARCHAR" />
+    <result column="laboratory_id" property="laboratory_id" jdbcType="INTEGER" />
+    <result column="device_id" property="device_id" jdbcType="INTEGER" />
+    <result column="manager_id" property="manager_id" jdbcType="INTEGER" />
+    <result column="start_time" property="start_time" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="end_time" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    openTime_id, laboratory_id, device_id, manager_id, start_time, end_time, status, created_at, week
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from opentime
+    where openTime_id = #{openTime_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from opentime
+    where openTime_id = #{openTime_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Opentime" >
+    insert into opentime (openTime_id, laboratory_id, device_id,
+                          manager_id, start_time, end_time,
+      status, created_at, week)
+    values (#{openTime_id,jdbcType=INTEGER}, #{laboratory_id,jdbcType=INTEGER}, #{device_id,jdbcType=INTEGER}, 
+      #{manager_id,jdbcType=INTEGER}, #{start_time,jdbcType=TIMESTAMP}, #{end_time,jdbcType=TIMESTAMP},
+      #{status,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP}),
+      #{week,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Opentime" >
+    insert into opentime
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="openTime_id != null" >
+        openTime_id,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+      <if test="laboratory_id != null" >
+        laboratory_id,
+      </if>
+      <if test="device_id != null" >
+        device_id,
+      </if>
+      <if test="manager_id != null" >
+        manager_id,
+      </if>
+      <if test="start_time != null" >
+        start_time,
+      </if>
+      <if test="end_time != null" >
+        end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created_at != null" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="openTime_id != null" >
+        #{openTime_id,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="laboratory_id != null" >
+        #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="device_id != null" >
+        #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="manager_id != null" >
+        #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Opentime" >
+    update opentime
+    <set >
+      <if test="laboratory_id != null" >
+        laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="device_id != null" >
+        device_id = #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="manager_id != null" >
+        manager_id = #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        start_time = #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        end_time = #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where openTime_id = #{openTime_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Opentime" >
+    update opentime
+    set laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+      week = #{week,jdbcType=VARCHAR},
+      device_id = #{device_id,jdbcType=INTEGER},
+        manager_id = #{manager_id,jdbcType=INTEGER},
+      start_time = #{start_time,jdbcType=TIMESTAMP},
+      end_time = #{end_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{created_at,jdbcType=TIMESTAMP}
+    where openTime_id = #{openTime_id,jdbcType=INTEGER}
+  </update>
+
+  <!--  int setOpenTime(@Param("list") List<DeviceLoanOut> list);-->
+  <insert id="setOpenTime" parameterType="java.util.List" >
+    insert into opentime(
+    device_id, manager_id, start_time, end_time, status
+    ) values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.device_id},
+      #{item.manager_id},
+      #{item.start_time},
+      #{item.end_time},
+      #{item.status}
+      )
+    </foreach>
+  </insert>
+
+  <!--  int setOpenLabTime(@Param("list") List<DeviceLoanOut> list);-->
+  <insert id="setOpenLabTime" parameterType="java.util.List" >
+    insert into opentime(
+    laboratory_id, manager_id, start_time, end_time, status
+    ) values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.laboratory_id},
+      #{item.manager_id},
+      #{item.start_time},
+      #{item.end_time},
+      #{item.status}
+      )
+    </foreach>
+  </insert>
+
+  <!-- 批量插入实验室开放时间 -->
+  <insert id="batchInsertOpenLabTime" parameterType="java.util.List">
+    insert into opentime(
+    laboratory_id, manager_id, week, start_time, end_time, status, created_at
+    ) values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.laboratory_id},
+      #{item.manager_id},
+      #{item.week},
+      #{item.start_time},
+      #{item.end_time},
+      #{item.status},
+      #{item.created_at}
+      )
+    </foreach>
+  </insert>
+
+  <!-- 批量插入设备开放时间 -->
+  <insert id="batchInsertOpenDeviceTime" parameterType="java.util.List">
+    insert into opentime(
+    device_id, manager_id, week, start_time, end_time, status, created_at
+    ) values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.device_id},
+      #{item.manager_id},
+      #{item.week},
+      #{item.start_time},
+      #{item.end_time},
+      #{item.status},
+      #{item.created_at}
+      )
+    </foreach>
+  </insert>
+
+  <!-- 获取设备的开放时间设置 -->
+  <select id="getDeviceOpenTimes" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from opentime
+    where device_id = #{deviceId,jdbcType=INTEGER}
+    and status = '空闲'
+    order by start_time
+  </select>
+
+  <!-- 获取实验室的开放时间设置 -->
+  <select id="getLabOpenTimes" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from opentime
+    where laboratory_id = #{laboratoryId,jdbcType=INTEGER}
+    and status = '空闲'
+    order by start_time
+  </select>
+</mapper>

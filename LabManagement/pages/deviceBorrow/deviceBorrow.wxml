@@ -1,0 +1,71 @@
+<!--pages/deviceBorrow/deviceBorrow.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 搜索 -->
+    <view class="search-bar-fixed">
+      <view class="search-row">
+        <view class="search-input-wrapper">
+          <input type="text" placeholder="搜索设备名称" placeholder-class="placeholder" value="{{searchKeyword}}" bindinput="onSearchInput" class="search-input" confirm-type="search" />
+
+          <!-- 状态选择下拉框 -->
+          <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(selectedStatus)}}" range="{{statusOptions}}">
+            <view class="status-picker">
+              {{selectedStatus}} <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <!-- 搜索结果提示 -->
+      <view wx:if="{{showFiltered && (searchKeyword || selectedStatus != '全部')}}" class="search-result-tip">
+        <text>
+          {{searchKeyword ? '搜索“' + searchKeyword + '”并且' : ''}}{{selectedStatus != '全部' ? '状态为“' + selectedStatus + '”' : '状态为“全部”'}}的结果（{{filteredDevicesArr.length}}个）
+        </text>
+      </view>
+    </view>
+
+    <!-- 设备列表 -->
+    <view class="device-list" style="margin-top: {{isOperation ? '280rpx' : (showFiltered && (searchKeyword || selectedStatus != '全部') ? '10rpx' : '-10rpx')}};">
+      <view wx:if="{{showFiltered ? filteredDevicesArr.length > 0 : deviceBorrowArr.length > 0}}">
+        <view wx:for="{{showFiltered ? filteredDevicesArr : deviceBorrowArr}}" wx:key="reservation_id" data-index="{{index}}" bindtap="toDeviceDetail" class="device-item">
+
+          <view class="device-info">
+            <view class="info-row">
+              <text class="label">名称：</text>
+              <text class="value">{{item.deviceDetail.device_name || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">借用人：</text>
+              <text class="value">{{item.borrowerDetail.username || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">用途：</text>
+              <text class="value">{{item.purpose || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">状态：</text>
+              <text class="value">{{item.status || '未知'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text wx:if="{{showFiltered && searchKeyword}}">未找到"{{searchKeyword}}"相关的设备</text>
+        <text wx:else>暂无设备信息</text>
+      </view>
+    </view>
+
+    <!-- 自定义底部导航栏 -->
+    <custom-tabbar current="4"></custom-tabbar>
+
+    <!-- 给底部栏留出空间 -->
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.FaultReportLabMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.FaultReportLab" >
+    <id column="report_id" property="report_id" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="INTEGER" />
+    <result column="laboratory_id" property="laboratory_id" jdbcType="INTEGER" />
+    <result column="lab_reservation_id" property="lab_reservation_id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="images" property="images" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    report_id, user_id, laboratory_id, lab_reservation_id, status, created_at, description, images
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fault_report_lab
+    where report_id = #{report_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fault_report_lab
+    where report_id = #{report_id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.FaultReportLab" >
+    insert into fault_report_lab (report_id, user_id, laboratory_id, lab_reservation_id,
+                                  status, created_at, description,
+                                  images)
+    values (#{report_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{laboratory_id,jdbcType=INTEGER},
+            #{lab_reservation_id,jdbcType=INTEGER},
+            #{status,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR},
+            #{images,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.FaultReportLab" >
+    insert into fault_report_lab
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="report_id != null" >
+        report_id,
+      </if>
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="laboratory_id != null" >
+        laboratory_id,
+      </if>
+      <if test="lab_reservation_id != null" >
+        lab_reservation_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created_at != null" >
+        created_at,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="report_id != null" >
+        #{report_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null" >
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="laboratory_id != null" >
+        #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="lab_reservation_id != null" >
+        #{lab_reservation_id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.FaultReportLab" >
+    update fault_report_lab
+    <set >
+      <if test="user_id != null" >
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="laboratory_id != null" >
+        laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="lab_reservation_id != null" >
+        lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where report_id = #{report_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.FaultReportLab" >
+    update fault_report_lab
+    set user_id = #{user_id,jdbcType=INTEGER},
+        laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+        lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER},
+        status = #{status,jdbcType=VARCHAR},
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+        description = #{description,jdbcType=LONGVARCHAR},
+        images = #{images,jdbcType=LONGVARCHAR}
+    where report_id = #{report_id,jdbcType=INTEGER}
+  </update>
+
+  <!--  FaultReportLab selectByLabId(Integer lab_id);-->
+  <select id="selectByLabId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fault_report_lab
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER} and status = '可能发生故障'
+  </select>
+
+</mapper>

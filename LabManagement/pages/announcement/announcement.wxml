@@ -1,0 +1,34 @@
+<!-- pages/announcement/announcement.wxml -->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-container">
+  <!-- 公告列表 -->
+  <view class="announcement-list">
+    <view wx:if="{{announcementArr.length > 0}}">
+      <view wx:for="{{announcementArr}}" wx:key="announcement_id" class="announcement-card" data-index="{{index}}" bindtap="toAnnouncementDetail">
+        <view class="card-image-wrapper">
+          <image src="{{item.image_url || '/images/no-image.png'}}" mode="aspectFill" class="card-image" />
+        </view>
+
+        <view class="card-content">
+          <view class="card-header">
+            <text class="card-title">{{item.title}}</text>
+            <text class="card-time">{{utils.formatDateTime(item.publish_time)}}</text>
+          </view>
+
+          <view class="card-summary">
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <view class="empty-icon">📋</view>
+      <text class="empty-text">暂无公告</text>
+    </view>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="2"></custom-tabbar>
+</view>

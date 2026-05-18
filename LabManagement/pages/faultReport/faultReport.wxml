@@ -1,0 +1,21 @@
+<!--pages/faultReport/faultReport.wxml-->
+<view class="page-container">
+  <!-- 功能菜单部分 -->
+  <view class="menu-section">
+
+    <view class="menu-item" bindtap="toFaultReportDevice">
+      <text>设备故障上报</text>
+    </view>
+
+    <view class="menu-item" bindtap="toFaultReportLab">
+      <text>实验室故障上报</text>
+    </view>
+
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 底部占位符，防止内容被遮挡 -->
+  <view class="tabbar-placeholder"></view>
+</view>

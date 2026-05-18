@@ -1,0 +1,10 @@
+ <!-- pages/login/login.wxml -->
+ <view class="login-container">
+  <input type="text" placeholder="请输入账号" value="{{user.account}}" bindinput="onInputAccount" />
+  <input type="password" placeholder="请输入密码" value="{{user.password}}" bindinput="onInputPassword" />
+  <button type="primary" bindtap="login">登录</button>
+  
+  <view class="register-link" bindtap="goToRegister">
+    <text>没有账号？立即注册</text>
+  </view>
+</view>

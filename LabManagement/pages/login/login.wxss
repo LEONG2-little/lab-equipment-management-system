@@ -1,0 +1,25 @@
+/* pages/login/login.wxss */
+.login-container {
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.login-container input {
+  border: 1rpx solid #ccc;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.login-container button {
+  margin-top: 20rpx;
+}
+
+.register-link {
+  text-align: center;
+  color: #576b95;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+}

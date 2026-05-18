@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
+  },
+  "navigationBarTitleText": "实验室预约"
+}

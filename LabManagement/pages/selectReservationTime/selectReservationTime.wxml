@@ -1,0 +1,48 @@
+<!--pages/selectReservationTime/selectReservationTime.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="container">
+
+<!-- 日期方块列表 -->
+<view class="date-section">
+  <view class="section-title">请选择预约日期</view>
+  <view class="date-grid">
+    <view wx:for="{{dateList}}" wx:key="index" class="date-item {{item.date === selectedDate ? 'selected' : ''}} {{item.disabled ? 'disabled' : ''}}" bindtap="{{item.disabled ? '' : 'onDateSelect'}}" data-date="{{item.date}}" data-display="{{item.display}}">
+      <view class="date-week">{{item.week}}</view>
+      <view class="date-day">{{item.day}}</view>
+      <view class="date-month">{{item.month}}月</view>
+    </view>
+  </view>
+</view>
+
+<!-- 时间段选择 -->
+<view class="time-section" wx:if="{{selectedDate}}">
+  <view class="section-title">请选择时间段</view>
+  <view class="time-grid">
+    <view wx:for="{{timeSlots}}" wx:key="index" class="time-item {{item.selected ? 'selected' : ''}} {{item.disabled ? 'disabled' : ''}}" bindtap="onTimeSelect" data-index="{{index}}">
+      <view class="time-label">{{item.label}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 使用用途输入 -->
+<view class="purpose-section" wx:if="{{selectedDate}}">
+  <view class="section-title">使用用途</view>
+  <input type="text" class="purpose-input" placeholder="请输入使用用途" value="{{purpose}}" bindinput="onInputPurpose" />
+</view>
+
+<!-- 预约时间限定提示 -->
+<view class="limit-tip" wx:if="{{limitedTime.start_time && limitedTime.end_time && selectedDate}}">
+  <text>预约时间限定：{{utils.formatTime(limitedTime.start_time)}} 至 {{utils.formatTime(limitedTime.end_time)}}</text>
+</view>
+
+<view class="confirm-btn-container">
+  <button class="confirm-btn {{!selectedDate || !selectedTimeObject || !purpose ? 'disabled' : ''}}" bindtap="checkReservation">确定预约</button>
+</view>
+
+<!-- 自定义底部导航栏 -->
+<custom-tabbar current="4"></custom-tabbar>
+
+<!-- 给底部栏留出空间 -->
+<view class="tabbar-placeholder"></view>
+</view>

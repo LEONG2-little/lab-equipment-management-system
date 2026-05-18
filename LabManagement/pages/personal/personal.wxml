@@ -1,0 +1,49 @@
+<!-- pages/personal/personal.wxml -->
+<view class="personal-container">
+  <!-- 用户信息 -->
+  <view class="user-info">
+    <view class="info-item">
+      <text class="label">姓名：</text>
+      <text class="value">{{user.username}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="label">身份：</text>
+      <text class="value">{{user.identity_type}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="label">权限：</text>
+      <text class="value">{{permission_level}}</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="toHistorySelect">
+      <text>预约历史</text>
+    </view>
+
+    <view class="menu-item" bindtap="toMyAllReservation">
+      <text>我的预约</text>
+    </view>
+
+    <view class="menu-item" bindtap="toMyManage" wx:if="{{user.identity_type !== '学生'}}">
+      <text>我的管理</text>
+    </view>
+
+    <view class="menu-item" bindtap="toPersonalCenter">
+      <text>个人中心</text>
+    </view>
+
+    <view class="menu-item" bindtap="logout">
+      <text>退出登录</text>
+    </view>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="3"></custom-tabbar>
+  
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

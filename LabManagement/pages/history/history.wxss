@@ -1,0 +1,84 @@
+/* pages/history/history.wxss */
+.reservation-container {
+  padding: 20rpx;
+}
+
+.reservation-item {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-area {
+  flex: 1;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item .label {
+  color: #666;
+  min-width: 10rpx;
+  width: auto; 
+  flex-shrink: 0;
+}
+
+.info-item .value {
+  color: #333;
+  flex: 1;
+}
+
+.button-area {
+  margin-left: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200rpx;
+}
+
+.return-btn {
+  background-color: #007AFF;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  padding: 15rpx 25rpx;
+  line-height: 1.4;
+  margin: 0;
+  min-width: 4rpx;
+  height: auto;
+}
+
+.return-btn.disabled {
+  background-color: #CCCCCC !important;
+  color: #999999 !important;
+  opacity: 0.6;
+}
+
+.return-btn:not(.disabled):active {
+  background-color: #0056CC;
+  opacity: 0.8;
+}
+
+.empty {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.tabbar-placeholder {
+  height: 100rpx;
+}

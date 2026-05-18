@@ -1,0 +1,55 @@
+<!--pages/myDevice/myDevice.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 搜索框 -->
+    <view class="search-box">
+      <view class="search-input-wrapper">
+        <input type="text" placeholder="搜索设备名称" placeholder-class="placeholder" value="{{searchKeyword}}" bindinput="onSearchInput" class="search-input" confirm-type="search" />
+      </view>
+
+      <view class="hint-text">
+        <text>已显示您当前权限可预约的设备</text>
+      </view>
+    </view>
+
+    <!-- 搜索结果提示 -->
+    <view wx:if="{{showFiltered && searchKeyword}}" class="search-result-tip">
+      <text>搜索"{{searchKeyword}}"的结果（{{filteredDevicesArr.length}}个）</text>
+    </view>
+
+    <view wx:if="{{filteredDevicesArr.length>0}}">
+      <view wx:for="{{filteredDevicesArr}}" wx:key="device_id" data-index="{{index}}" bindtap="toReservationDevice" class="device-item">
+
+        <view class="image-area">
+          <!-- 直接使用网络图片URL -->
+          <image src="{{item.image_url || '/images/no-image.png'}}" mode="aspectFit" class="device-image" />
+        </view>
+
+        <view class="device-info">
+          <view class="info-row">
+            <text class="label">名称：</text>
+            <text class="value">{{item.device_name || '未知'}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">地点：</text>
+            <text class="value">{{item.location || '未知'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty">
+      <text wx:if="{{showFiltered && searchKeyword}}">未找到"{{searchKeyword}}"相关的设备</text>
+      <text wx:else>暂无设备信息</text>
+    </view>
+
+    <!-- 自定义底部导航栏 -->
+    <custom-tabbar current="4"></custom-tabbar>
+
+    <!-- 给底部栏留出空间 -->
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

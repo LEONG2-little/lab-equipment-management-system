@@ -1,0 +1,63 @@
+<!--pages/labFaultDetail/labFaultDetail.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="device-detail-container">
+
+  <view class="device-card">
+
+    <view class="info-item">
+      <text class="info-label">名称：</text>
+      <text class="info-value">{{labArr.laboratory_name || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">地点：</text>
+      <text class="info-value">{{labArr.location || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">故障上报人：</text>
+      <text class="info-value">{{userArr.username}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">故障描述：</text>
+      <text class="info-value">{{faultReportArr.description}}</text>
+    </view>
+
+    <!-- 故障图片区域 -->
+    <view class="info-item" wx:if="{{faultImageUrl}}">
+      <text class="info-label">故障图片：</text>
+      <view class="image-preview">
+        <!-- 直接使用网络图片URL -->
+        <image 
+          src="{{faultImageUrl}}" 
+          mode="widthFix" 
+          class="fault-image" 
+          bindtap="previewFaultImage"
+        />
+        <text class="preview-tip">点击图片放大查看</text>
+      </view>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">故障上报时间：</text>
+      <text class="info-value">{{utils.formatDateTime(faultReportArr.created_at)}}</text>
+    </view>
+
+  </view>
+
+  <view class="action-area">
+    <button class="borrow-btn" bindtap="toCancelFault">故障误报</button>
+  </view>
+
+  <view class="action-area" style="margin-top: 20rpx;">
+    <button class="borrow-btn" bindtap="toConfirmFault">确定故障</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

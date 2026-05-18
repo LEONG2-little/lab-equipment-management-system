@@ -1,0 +1,47 @@
+<!--pages/changeStatus/changeStatus.wxml-->
+<view class="change-status-container">
+  <!-- 设备信息 -->
+  <view class="device-card">
+
+    <view class="info-item">
+      <text class="info-label">设备名称：</text>
+      <text class="info-value">
+        <text wx:for="{{deviceData}}" wx:key="device_id">{{item.device_name}}{{index < deviceData.length - 1 ? '、' : ''}}</text>
+      </text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">当前状态：</text>
+      <text class="info-value">{{deviceData.length > 0 ? deviceData[0].status : ''}}</text>
+    </view>
+  </view>
+
+  <!-- 状态选择 -->
+  <view class="device-card">
+    <view class="info-item">
+      <text class="info-label">修改为：</text>
+      <view class="picker-container info-value">
+        <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(changeStatus)}}" range="{{statusOptions}}">
+          <view class="picker-selector">
+            {{changeStatus}} <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!--pages/changeStatus/changeStatus.wxml-->
+  <view class="device-card" wx:if="{{ changeStatus == '故障' && deviceStatus !== '故障'}}">
+    <textarea placeholder="填写故障原因" value="{{faultReason}}" bindinput="onInputReason" class="fault-textarea" auto-height maxlength="-1" />
+  </view>
+
+  <view class="action-area">
+    <button class="confirm-btn" bindtap="confirmChange">确认修改</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

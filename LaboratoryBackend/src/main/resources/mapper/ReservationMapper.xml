@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.ReservationMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Reservation" >
+    <id column="reservation_id" property="reservation_id" jdbcType="INTEGER" />
+    <result column="manager_id" property="manager_id" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="INTEGER" />
+    <result column="device_id" property="device_id" jdbcType="INTEGER" />
+    <result column="start_time" property="start_time" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="end_time" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+    <result column="return_at" property="return_at" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.laboratorybackend.laboratorybackend.domain.Reservation" extends="BaseResultMap" >
+    <result column="purpose" property="purpose" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reservation_id, manager_id, user_id, device_id, start_time, end_time, status, created_at, 
+    return_at
+  </sql>
+  <sql id="Blob_Column_List" >
+    purpose
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where reservation_id = #{reservation_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reservation
+    where reservation_id = #{reservation_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Reservation" >
+    insert into reservation (reservation_id, manager_id, user_id, 
+      device_id, start_time, end_time, 
+      status, created_at, return_at, 
+      purpose)
+    values (#{reservation_id,jdbcType=INTEGER}, #{manager_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, 
+      #{device_id,jdbcType=INTEGER}, #{start_time,jdbcType=TIMESTAMP}, #{end_time,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP}, #{return_at,jdbcType=TIMESTAMP}, 
+      #{purpose,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Reservation" useGeneratedKeys="true" keyProperty="reservation_id">
+    insert into reservation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reservation_id != null" >
+        reservation_id,
+      </if>
+      <if test="manager_id != null" >
+        manager_id,
+      </if>
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="device_id != null" >
+        device_id,
+      </if>
+      <if test="start_time != null" >
+        start_time,
+      </if>
+      <if test="end_time != null" >
+        end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created_at != null" >
+        created_at,
+      </if>
+      <if test="return_at != null" >
+        return_at,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reservation_id != null" >
+        #{reservation_id,jdbcType=INTEGER},
+      </if>
+      <if test="manager_id != null" >
+        #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null" >
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="device_id != null" >
+        #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="return_at != null" >
+        #{return_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Reservation" >
+    update reservation
+    <set >
+      <if test="manager_id != null" >
+        manager_id = #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null" >
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="device_id != null" >
+        device_id = #{device_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        start_time = #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        end_time = #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="return_at != null or _parameter.getReturn_at() == null" >
+        return_at = #{return_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where reservation_id = #{reservation_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.laboratorybackend.laboratorybackend.domain.Reservation" >
+    update reservation
+    set manager_id = #{manager_id,jdbcType=INTEGER},
+      user_id = #{user_id,jdbcType=INTEGER},
+      device_id = #{device_id,jdbcType=INTEGER},
+      start_time = #{start_time,jdbcType=TIMESTAMP},
+      end_time = #{end_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{created_at,jdbcType=TIMESTAMP},
+      return_at = #{return_at,jdbcType=TIMESTAMP},
+      purpose = #{purpose,jdbcType=LONGVARCHAR}
+    where reservation_id = #{reservation_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Reservation" >
+    update reservation
+    set manager_id = #{manager_id,jdbcType=INTEGER},
+      user_id = #{user_id,jdbcType=INTEGER},
+      device_id = #{device_id,jdbcType=INTEGER},
+      start_time = #{start_time,jdbcType=TIMESTAMP},
+      end_time = #{end_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{created_at,jdbcType=TIMESTAMP},
+      return_at = #{return_at,jdbcType=TIMESTAMP}
+    where reservation_id = #{reservation_id,jdbcType=INTEGER}
+  </update>
+
+  <!--  List<Reservation> getMyReservation(Integer user_id);-->
+  <select id="getMyReservation" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where user_id = #{user_id,jdbcType=INTEGER} and status = '未完成'
+  </select>
+
+  <!--  List<Reservation> getMyReservationHistory(Integer user_id);-->
+  <select id="getMyReservationHistory" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where user_id = #{user_id,jdbcType=INTEGER} and status != '未完成'
+  </select>
+
+  <!--  List<Reservation> getDeviceReservation(Integer device_id);-->
+  <select id="getDeviceReservation" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where device_id = #{device_id,jdbcType=INTEGER} and status in ('未完成','处理中')
+  </select>
+
+<!--  List<Reservation> getDeviceBorrow(Integer manager_id);-->
+  <select id="getDeviceBorrow" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where manager_id = #{manager_id,jdbcType=INTEGER}
+  </select>
+
+<!--  List<Reservation> getAllReservation();-->
+  <select id="getAllReservation" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+  </select>
+
+<!--  List<Reservation> getReservationByUserId(Integer user_id);-->
+  <select id="getReservationByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+
+  <!-- 查询所有已过期但状态仍为"未完成"的设备预约 -->
+  <select id="findExpiredDeviceReservations" resultMap="ResultMapWithBLOBs" parameterType="java.util.Date">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reservation
+    where status = '未完成'
+    and end_time &lt; #{currentTime}
+  </select>
+
+  <!-- 批量更新设备预约状态为"系统自动归还" -->
+  <update id="batchUpdateDeviceToReturned">
+    update reservation
+    set status = '已完成',
+    return_at = #{returnTime}
+    where reservation_id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and status = '未完成'
+  </update>
+
+  <select id="checkConflictByDeviceAndTime" resultType="int">
+    SELECT COUNT(*)
+    FROM reservation
+    WHERE device_id = #{deviceId}
+    AND status IN ('未完成', '处理中')
+    AND (
+    (start_time &lt; #{endTime} AND end_time &gt; #{startTime})
+    )
+  </select>
+
+  <select id="checkConflictByDeviceIdsAndTime" resultType="java.lang.Integer">
+    SELECT device_id
+    FROM reservation
+    WHERE device_id IN
+    <foreach collection="deviceIds" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    AND status IN ('未完成', '处理中')
+    AND (
+    (start_time &lt; #{endTime} AND end_time &gt; #{startTime})
+    )
+    LIMIT 1
+  </select>
+</mapper>

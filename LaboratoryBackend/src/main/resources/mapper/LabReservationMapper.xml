@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.LabReservationMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.LabReservation" >
+    <id column="lab_reservation_id" property="lab_reservation_id" jdbcType="INTEGER" />
+    <result column="manager_id" property="manager_id" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="INTEGER" />
+    <result column="laboratory_id" property="laboratory_id" jdbcType="INTEGER" />
+    <result column="start_time" property="start_time" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="end_time" jdbcType="TIMESTAMP" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+    <result column="return_at" property="return_at" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lab_reservation_id, manager_id, user_id, laboratory_id, start_time, end_time, purpose, 
+    status, created_at, return_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lab_reservation
+    where lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.LabReservation" >
+    insert into lab_reservation (lab_reservation_id, manager_id, user_id, 
+      laboratory_id, start_time, end_time, 
+      purpose, status, created_at, 
+      return_at)
+    values (#{lab_reservation_id,jdbcType=INTEGER}, #{manager_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, 
+      #{laboratory_id,jdbcType=INTEGER}, #{start_time,jdbcType=TIMESTAMP}, #{end_time,jdbcType=TIMESTAMP}, 
+      #{purpose,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{created_at,jdbcType=TIMESTAMP}, 
+      #{return_at,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.LabReservation" useGeneratedKeys="true" keyProperty="lab_reservation_id">
+    insert into lab_reservation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lab_reservation_id != null" >
+        lab_reservation_id,
+      </if>
+      <if test="manager_id != null" >
+        manager_id,
+      </if>
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="laboratory_id != null" >
+        laboratory_id,
+      </if>
+      <if test="start_time != null" >
+        start_time,
+      </if>
+      <if test="end_time != null" >
+        end_time,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created_at != null" >
+        created_at,
+      </if>
+      <if test="return_at != null" >
+        return_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lab_reservation_id != null" >
+        #{lab_reservation_id,jdbcType=INTEGER},
+      </if>
+      <if test="manager_id != null" >
+        #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null" >
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="laboratory_id != null" >
+        #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="return_at != null" >
+        #{return_at,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.LabReservation" >
+    update lab_reservation
+    <set >
+      <if test="manager_id != null" >
+        manager_id = #{manager_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null" >
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="laboratory_id != null" >
+        laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null" >
+        start_time = #{start_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="end_time != null" >
+        end_time = #{end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="created_at != null" >
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="return_at != null" >
+        return_at = #{return_at,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.LabReservation" >
+    update lab_reservation
+    set manager_id = #{manager_id,jdbcType=INTEGER},
+      user_id = #{user_id,jdbcType=INTEGER},
+      laboratory_id = #{laboratory_id,jdbcType=INTEGER},
+      start_time = #{start_time,jdbcType=TIMESTAMP},
+      end_time = #{end_time,jdbcType=TIMESTAMP},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{created_at,jdbcType=TIMESTAMP},
+      return_at = #{return_at,jdbcType=TIMESTAMP}
+    where lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER}
+  </update>
+
+<!--  List<Laboratory> getAllLabReservation();-->
+  <select id="getAllLabReservation" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+  </select>
+
+  <!-- 检查时间段冲突 -->
+  <select id="checkTimeSlotConflict" resultType="int">
+    select count(*)
+    from lab_reservation
+    where laboratory_id = #{laboratory_id}
+      and status in ('未完成','处理中')
+      and (
+      (start_time &lt; #{end_time} and end_time &gt; #{start_time})
+      )
+  </select>
+
+<!--  List<LabReservation> getLabReservation(Integer laboratory_id);-->
+  <select id="getLabReservation" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER} and status in ('未完成','处理中')
+  </select>
+
+  <!--  List<LabReservation> getLabUseReservation(Integer user_id);-->
+  <select id="getLabUseReservation" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where user_id = #{user_id,jdbcType=INTEGER} and status = '未完成'
+  </select>
+
+<!--  List<LabReservation> getLabBorrow(Integer manager_id);-->
+  <select id="getLabBorrow" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where manager_id = #{manager_id,jdbcType=INTEGER}
+  </select>
+
+<!--  List<LabReservation> getLabReservationDetail(Integer lab_reservation_id);-->
+  <select id="getLabReservationDetail" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where lab_reservation_id = #{lab_reservation_id,jdbcType=INTEGER}
+  </select>
+
+  <!-- 查询所有已过期但状态仍为"未完成"的预约 -->
+  <select id="findExpiredReservations" resultMap="BaseResultMap" parameterType="java.util.Date">
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where status = '未完成'
+    and end_time &lt; #{currentTime}
+  </select>
+
+  <!-- 批量更新预约状态为"已完成" -->
+  <update id="batchUpdateToReturned">
+    update lab_reservation
+    set status = '已完成',
+    return_at = #{returnTime}
+    where lab_reservation_id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and status = '未完成'
+  </update>
+
+<!--  List<LabReservation> getMyReservationHistoryLab(Integer user_id);-->
+  <select id="getMyReservationHistoryLab" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where user_id = #{user_id,jdbcType=INTEGER} and status != '未完成'
+  </select>
+
+<!--  LabReservation selectByLabReservationId(Integer laboratory_id);-->
+  <select id="selectByLabReservationId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER} and status != '处理中'
+  </select>
+
+<!--  List<LabReservation> getLabReservationByUserId(Integer user_id);-->
+  <select id="getLabReservationByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from lab_reservation
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+</mapper>

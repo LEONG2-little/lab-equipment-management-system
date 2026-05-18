@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
+  },
+  "navigationBarTitleText": "选择上报的实验室预约"
+}

@@ -1,0 +1,79 @@
+<!--pages/deviceDetail/deviceDetail.wxml-->
+<!-- 引入 WXS -->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="device-detail-container">
+
+  <view class="device-card">
+
+    <view class="info-item">
+      <text class="info-label">设备名称：</text>
+      <text class="info-value">{{deviceArr.device_name || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备分类：</text>
+      <text class="info-value">{{deviceArr.category || '未分类'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备型号：</text>
+      <text class="info-value">{{deviceArr.model || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">规格参数：</text>
+      <text class="info-value">{{deviceArr.spec || '暂无规格参数'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">存放地点：</text>
+      <text class="info-value">{{deviceArr.location || '未设置地点'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备描述：</text>
+      <text class="info-value">{{deviceArr.description || '暂无描述'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">借用权限：</text>
+      <text class="info-value">{{deviceArr.required_permission}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">借用人：</text>
+      <text class="info-value">{{username}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">用途：</text>
+      <text class="info-value">{{reservationArr.purpose}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">状态：</text>
+      <text class="info-value">{{reservationArr.status}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">预订使用时间为：</text>
+      <text class="info-value">{{utils.formatDateTime(reservationArr.start_time)}} 至 {{utils.formatDateTime(reservationArr.end_time)}}</text>
+    </view>
+
+    <view class="info-item" wx:if="{{reservationArr.return_at}}">
+      <text class="info-label">完成时间：</text>
+      <text class="info-value">{{utils.formatDateTime(reservationArr.return_at)}}</text>
+    </view>
+  </view>
+  
+  <view class="action-area">
+    <button wx:if="{{reservationArr.status == '未完成'}}" class="borrow-btn" bindtap="cancelReservation">强制取消预约</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

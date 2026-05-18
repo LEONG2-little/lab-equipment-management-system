@@ -1,0 +1,80 @@
+<!--pages/myDeviceDetails/myDeviceDetails.wxml-->
+<view class="device-detail-container">
+  <!-- 设备信息 -->
+  <view class="device-card">
+
+    <view class="info-item">
+      <text class="info-label">设备名称：</text>
+      <text class="info-value">{{deviceDetailArr.device_name || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备分类：</text>
+      <text class="info-value">{{deviceDetailArr.category || '未分类'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备型号：</text>
+      <text class="info-value">{{deviceDetailArr.model || '未设置'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">规格参数：</text>
+      <text class="info-value">{{deviceDetailArr.spec || '暂无规格参数'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">存放地点：</text>
+      <text class="info-value">{{deviceDetailArr.location || '未设置地点'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备描述：</text>
+      <text class="info-value">{{deviceDetailArr.description || '暂无描述'}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备状态：</text>
+      <text class="info-value">{{deviceDetailArr.status}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备价格：</text>
+      <text class="info-value">{{deviceDetailArr.price}}元</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">设备状态：</text>
+      <text class="info-value">{{deviceDetailArr.status}}</text>
+    </view>
+
+    <view class="info-item">
+      <text class="info-label">开放机时：</text>
+      <text class="info-value">{{openTimesText}}</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-area">
+    <button wx:if="{{deviceDetailArr.status === '闲置' || deviceDetailArr.status === '课题组专用' || deviceDetailArr.status === '故障'}}" class="borrow-btn" bindtap="toChangeStatus">修改设备状态</button>
+  </view>
+  <view class="action-area">
+    <button wx:if="{{deviceDetailArr.status === '闲置'}}" class="borrow-btn" bindtap="toSelectOpenTime">开放机时</button>
+  </view>
+  <view class="action-area">
+    <button wx:if="{{deviceDetailArr.status === '闲置'}}" class="borrow-btn" bindtap="Scrap">报废</button>
+  </view>
+  <view class="action-area">
+    <button wx:if="{{deviceDetailArr.status === '空闲'}}" class="borrow-btn" bindtap="disableDeviceOpenTime">停止开放机时</button>
+  </view>
+  <view class="action-area">
+    <button wx:if="{{deviceDetailArr.status === '空闲'}}" class="borrow-btn" bindtap="toUpdataDeviceOpenTime">修改开放机时</button>
+  </view>
+
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

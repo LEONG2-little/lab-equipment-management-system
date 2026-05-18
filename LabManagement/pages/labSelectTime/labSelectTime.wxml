@@ -1,0 +1,46 @@
+<!--pages/labSelectTime/labSelectTime.wxml-->
+<view class="container">
+
+  <!-- 日期方块列表 -->
+  <view class="date-section">
+    <view class="section-title">请选择预约日期</view>
+    <view class="date-grid">
+      <view wx:for="{{dateList}}" wx:key="index" class="date-item {{item.date === selectedDate ? 'selected' : ''}} {{item.disabled ? 'disabled' : ''}}" bindtap="{{item.disabled ? '' : 'onDateSelect'}}" data-date="{{item.date}}" data-display="{{item.display}}">
+        <view class="date-week">{{item.week}}</view>
+        <view class="date-day">{{item.day}}</view>
+        <view class="date-month">{{item.month}}月</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="time-section" wx:if="{{selectedDate}}">
+    <view class="section-title">请选择时间段</view>
+
+    <!-- 删除预约数量提示 -->
+    <!-- 原: <view class="daily-reservation-tip" wx:if="{{userDailyReservations > 0}}"> ... </view> -->
+
+    <view class="time-grid">
+      <view wx:for="{{timeSlots}}" wx:key="index" class="time-item {{item.selected ? 'selected' : ''}} {{item.disabled ? 'disabled' : ''}}" bindtap="onTimeSelect" data-index="{{index}}">
+        <view class="time-label">{{item.label}}</view>
+      </view>
+    </view>
+    <view class="selected-count">
+      已选择 {{selectedTimeObjects.length}} 个时间段
+    </view>
+  </view>
+
+  <view class="purpose-section" wx:if="{{selectedDate}}">
+    <view class="section-title">使用用途</view>
+    <input type="text" class="purpose-input" placeholder="请输入使用用途" value="{{purpose}}" bindinput="onInputPurpose" />
+  </view>
+
+  <view class="confirm-btn-container">
+    <button class="confirm-btn {{!selectedDate || selectedTimeObjects.length === 0 ? 'disabled' : ''}}" bindtap="confirmReservation">确定预约</button>
+  </view>
+
+  <!-- 自定义底部导航栏 -->
+  <custom-tabbar current="4"></custom-tabbar>
+
+  <!-- 给底部栏留出空间 -->
+  <view class="tabbar-placeholder"></view>
+</view>

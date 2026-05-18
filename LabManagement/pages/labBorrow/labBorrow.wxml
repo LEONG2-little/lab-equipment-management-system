@@ -1,0 +1,71 @@
+<!--pages/labBorrow/labBorrow.wxml-->
+<wxs src="../../utils.wxs" module="utils" />
+
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 搜索 -->
+    <view class="search-bar-fixed">
+      <view class="search-row">
+        <view class="search-input-wrapper">
+          <input type="text" placeholder="搜索实验室名称" placeholder-class="placeholder" value="{{searchKeyword}}" bindinput="onSearchInput" class="search-input" confirm-type="search" />
+
+          <!-- 状态选择下拉框 -->
+          <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(selectedStatus)}}" range="{{statusOptions}}">
+            <view class="status-picker">
+              {{selectedStatus}} <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <!-- 搜索结果提示 -->
+      <view wx:if="{{showFiltered && (searchKeyword || selectedStatus != '全部')}}" class="search-result-tip">
+        <text>
+          {{searchKeyword ? '搜索“' + searchKeyword + '”并且' : ''}}{{selectedStatus != '全部' ? '状态为“' + selectedStatus + '”' : '状态为“全部”'}}的结果（{{filteredLabArr.length}}个）
+        </text>
+      </view>
+    </view>
+
+    <!-- 实验室列表 -->
+    <view class="lab-list" style="margin-top: {{showFiltered && (searchKeyword || selectedStatus != '全部') ? '10rpx' : '-10rpx'}};">
+      <view wx:if="{{showFiltered ? filteredLabArr.length > 0 : labBorrowArr.length > 0}}">
+        <view wx:for="{{showFiltered ? filteredLabArr : labBorrowArr}}" wx:key="lab_reservation_id" data-index="{{index}}" bindtap="toLabDetail" class="lab-item">
+
+          <view class="lab-info">
+            <view class="info-row">
+              <text class="label">实验室：</text>
+              <text class="value">{{item.labDetail.laboratory_name || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">借用人：</text>
+              <text class="value">{{item.borrowerDetail.username || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">用途：</text>
+              <text class="value">{{item.purpose || '未知'}}</text>
+            </view>
+
+            <view class="info-row">
+              <text class="label">状态：</text>
+              <text class="value">{{item.status || '未知'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text wx:if="{{showFiltered && searchKeyword}}">未找到"{{searchKeyword}}"相关的实验室</text>
+        <text wx:else>暂无实验室借出信息</text>
+      </view>
+    </view>
+
+    <!-- 自定义底部导航栏 -->
+    <custom-tabbar current="4"></custom-tabbar>
+
+    <!-- 给底部栏留出空间 -->
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

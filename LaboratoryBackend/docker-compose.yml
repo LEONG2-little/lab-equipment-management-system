@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # MySQL 数据库
+  mysql:
+    image: mysql:8.0
+    container_name: laboratory-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: laboratory
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # 自动导入 SQL 文件（把 laboratory.sql 放到 ./sql 目录）
+      #- ./sql:/docker-entrypoint-initdb.d
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - laboratory-network
+
+  # Spring Boot 后端
+  backend:
+    build: .
+    container_name: laboratory-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      # 可以覆盖配置文件中的变量
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      # 挂载图片目录，防止容器删除后图片丢失
+      - ./data/images:/app/images
+      - ./data/faultImages:/app/faultImages
+    networks:
+      - laboratory-network
+
+# 定义网络
+networks:
+  laboratory-network:
+    driver: bridge
+
+# 定义数据卷
+volumes:
+  mysql-data:

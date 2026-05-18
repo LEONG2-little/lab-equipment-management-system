@@ -1,0 +1,43 @@
+<!--pages/selectLabOpenTime/selectLabOpenTime.wxml-->
+<view class="container">
+
+<!-- 选择每周几 -->
+<view class="week-section">
+  <view class="section-title">选择开放星期</view>
+  <view class="week-grid">
+    <view wx:for="{{weekOptions}}" wx:key="index" 
+          class="week-item {{item.selected ? 'selected' : ''}}" 
+          bindtap="toggleWeek" data-index="{{index}}">
+      <text class="week-name">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="selected-week-tip" wx:if="{{selectedWeeks.length > 0}}">
+    已选择：{{selectedWeeksNames}}
+  </view>
+</view>
+
+<!-- 选择时间段 -->
+<view class="time-section">
+  <view class="section-title">选择开放时间段 (可多选)</view>
+  <view class="time-grid">
+    <view wx:for="{{timeSlots}}" wx:key="index" 
+          class="time-item {{item.selected ? 'selected' : ''}}" 
+          bindtap="toggleTimeSlot" data-index="{{index}}">
+      <view class="time-label">{{item.label}}</view>
+    </view>
+  </view>
+  <view class="selected-time-tip" wx:if="{{selectedTimeObjects.length > 0}}">
+    已选择 {{selectedTimeObjects.length}} 个时间段
+  </view>
+</view>
+
+<view class="input-wrapper">
+  <button class="confirm-btn" bindtap="setOpenTime">确认开放机时</button>
+</view>
+
+<!-- 自定义底部导航栏 -->
+<custom-tabbar current="4"></custom-tabbar>
+
+<!-- 给底部栏留出空间 -->
+<view class="tabbar-placeholder"></view>
+</view>

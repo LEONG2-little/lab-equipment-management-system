@@ -1,0 +1,64 @@
+<!--pages/myLab/myLab.wxml-->
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 搜索栏（固定） -->
+    <view class="search-bar-fixed">
+      <view class="search-row">
+        <view class="search-input-wrapper">
+          <input type="text" placeholder="搜索实验室地点" placeholder-class="placeholder" value="{{searchKeyword}}" bindinput="onSearchInput" class="search-input" confirm-type="search" />
+
+          <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(selectedStatus)}}" range="{{statusOptions}}">
+            <view class="status-picker">
+              {{selectedStatus}} <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+
+          <view wx:if="{{searchKeyword}}" bindtap="clearSearch" class="clear-btn">✕</view>
+        </view>
+      </view>
+
+      <view wx:if="{{showFiltered && (searchKeyword || selectedStatus != '全部')}}" class="search-result-tip">
+        <text>
+          {{searchKeyword ? '搜索“' + searchKeyword + '”' : ''}}{{selectedStatus != '全部' ? (searchKeyword ? ' 且 ' : '') + '状态为“' + selectedStatus + '”' : ''}}的结果（{{filteredLabsArr.length}}个）
+        </text>
+      </view>
+    </view>
+
+    <!-- 实验室列表 -->
+    <view class="lab-list" style="margin-top: {{showFiltered && (searchKeyword || selectedStatus != '全部') ? '180rpx' : '120rpx'}};">
+      <view wx:if="{{filteredLabsArr.length>0}}">
+        <view wx:for="{{filteredLabsArr}}" wx:key="laboratory_id" data-index="{{index}}" class="lab-item" bindtap="toMyLabDetails">
+  
+          <view class="image-area">
+            <!-- 直接使用网络图片URL -->
+            <image src="{{item.image_url || '/images/no-image.png'}}" mode="aspectFit" class="lab-image" />
+          </view>
+
+          <view class="lab-info">
+            <view class="info-row">
+              <text class="label">名称：</text>
+              <text class="value">{{item.laboratory_name || '未知'}}</text>
+            </view>
+            <view class="info-row">
+              <text class="label">地点：</text>
+              <text class="value">{{item.location || '未知'}}</text>
+            </view>
+            <view class="info-row">
+              <text class="label">状态：</text>
+              <text class="value">{{item.status || '未知'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text wx:if="{{showFiltered && searchKeyword}}">未找到"{{searchKeyword}}"相关的实验室</text>
+        <text wx:else>暂无实验室信息</text>
+      </view>
+    </view>
+
+    <custom-tabbar current="4"></custom-tabbar>
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

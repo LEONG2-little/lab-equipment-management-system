@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laboratorybackend.laboratorybackend.mapper.LaboratoryMapper" >
+  <resultMap id="BaseResultMap" type="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    <id column="laboratory_id" property="laboratory_id" jdbcType="INTEGER" />
+    <result column="laboratory_name" property="laboratory_name" jdbcType="VARCHAR" />
+    <result column="image_url" property="image_url" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="manager_id" property="manager_id" jdbcType="INTEGER" />
+    <result column="created_at" property="created_at" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.laboratorybackend.laboratorybackend.domain.Laboratory" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    laboratory_id, laboratory_name, image_url, location, status, manager_id, created_at
+  </sql>
+
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from laboratory
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from laboratory
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    insert into laboratory (laboratory_id, laboratory_name, image_url, location, status, manager_id, created_at, description)
+    values (#{laboratory_id,jdbcType=INTEGER}, #{laboratory_name,jdbcType=VARCHAR}, #{image_url,jdbcType=VARCHAR},
+            #{location,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{manager_id,jdbcType=INTEGER},
+            #{created_at,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    insert into laboratory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="laboratory_id != null" > laboratory_id, </if>
+      <if test="laboratory_name != null" > laboratory_name, </if>
+      <if test="image_url != null" > image_url, </if>
+      <if test="location != null" > location, </if>
+      <if test="status != null" > status, </if>
+      <if test="manager_id != null" > manager_id, </if>
+      <if test="created_at != null" > created_at, </if>
+      <if test="description != null" > description, </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="laboratory_id != null" > #{laboratory_id,jdbcType=INTEGER}, </if>
+      <if test="laboratory_name != null" > #{laboratory_name,jdbcType=VARCHAR}, </if>
+      <if test="image_url != null" > #{image_url,jdbcType=VARCHAR}, </if>
+      <if test="location != null" > #{location,jdbcType=VARCHAR}, </if>
+      <if test="status != null" > #{status,jdbcType=VARCHAR}, </if>
+      <if test="manager_id != null" > #{manager_id,jdbcType=INTEGER}, </if>
+      <if test="created_at != null" > #{created_at,jdbcType=TIMESTAMP}, </if>
+      <if test="description != null" > #{description,jdbcType=LONGVARCHAR}, </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    update laboratory
+    <set >
+      <if test="laboratory_name != null" > laboratory_name = #{laboratory_name,jdbcType=VARCHAR}, </if>
+      <if test="image_url != null" > image_url = #{image_url,jdbcType=VARCHAR}, </if>
+      <if test="location != null" > location = #{location,jdbcType=VARCHAR}, </if>
+      <if test="status != null" > status = #{status,jdbcType=VARCHAR}, </if>
+      <if test="manager_id != null" > manager_id = #{manager_id,jdbcType=INTEGER}, </if>
+      <if test="created_at != null" > created_at = #{created_at,jdbcType=TIMESTAMP}, </if>
+      <if test="description != null" > description = #{description,jdbcType=LONGVARCHAR}, </if>
+    </set>
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    update laboratory
+    set laboratory_name = #{laboratory_name,jdbcType=VARCHAR},
+        image_url = #{image_url,jdbcType=VARCHAR},
+        location = #{location,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR},
+        manager_id = #{manager_id,jdbcType=INTEGER},
+        created_at = #{created_at,jdbcType=TIMESTAMP},
+        description = #{description,jdbcType=LONGVARCHAR}
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.laboratorybackend.laboratorybackend.domain.Laboratory" >
+    update laboratory
+    set laboratory_name = #{laboratory_name,jdbcType=VARCHAR},
+        image_url = #{image_url,jdbcType=VARCHAR},
+        location = #{location,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR},
+        manager_id = #{manager_id,jdbcType=INTEGER},
+        created_at = #{created_at,jdbcType=TIMESTAMP}
+    where laboratory_id = #{laboratory_id,jdbcType=INTEGER}
+  </update>
+
+  <!--  List<Laboratory> getAllLaboratory(); -->
+  <select id="getAllLaboratory" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from laboratory
+  </select>
+
+  <!--  List<Laboratory> getCanBorrowLab(); -->
+  <select id="getCanBorrowLab" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from laboratory
+    where status = '空闲'
+  </select>
+
+  <!--  List<Laboratory> getMyLab(Integer manager_id); -->
+  <select id="getMyLab" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from laboratory
+    where manager_id = #{manager_id,jdbcType=INTEGER}
+  </select>
+
+  <!--  List<Laboratory> getLabFault(Integer user_id); -->
+  <select id="getLabFault" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from laboratory
+    where manager_id = #{user_id,jdbcType=INTEGER} and status = '可能发生故障'
+  </select>
+
+  <!-- 批量修改实验室状态 -->
+  <update id="batchChangeLabStatus">
+    update laboratory
+    set status = #{status,jdbcType=VARCHAR}
+    where laboratory_id in
+    <foreach collection="labIds" item="labId" open="(" separator="," close=")">
+      #{labId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

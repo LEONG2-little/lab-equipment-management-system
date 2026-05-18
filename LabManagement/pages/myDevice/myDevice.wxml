@@ -1,0 +1,85 @@
+<!--pages/myDevice/myDevice.wxml-->
+<view class="page-wrapper">
+  <view class="container">
+
+    <!-- 搜索和操作栏 -->
+    <view class="search-bar-fixed">
+
+      <view class="search-row">
+        <view class="search-input-wrapper">
+
+          <!-- 搜索框 -->
+          <input type="text" placeholder="搜索设备名称" placeholder-class="placeholder" value="{{searchKeyword}}" bindinput="onSearchInput" class="search-input" confirm-type="search" />
+
+          <!-- 状态选择下拉框 -->
+          <picker bindchange="onStatusChange" value="{{statusOptions.indexOf(selectedStatus)}}" range="{{statusOptions}}">
+            <view class="status-picker">
+              {{selectedStatus}} <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+
+          <view wx:if="{{searchKeyword}}" bindtap="clearSearch" class="clear-btn"></view>
+        </view>
+
+        <!-- 批量选择按钮 -->
+        <button class="batch-btn" bindtap="onBatchSelect">{{operation}}</button>
+      </view>
+
+      <!-- 搜索结果提示 -->
+      <view wx:if="{{showFiltered && (searchKeyword || selectedStatus != '全部')}}" class="search-result-tip">
+        <text>
+          {{searchKeyword ? '搜索“' + searchKeyword + '”并且' : ''}}{{selectedStatus != '全部' ? '状态为“' + selectedStatus + '”' : '状态为“全部”'}}的结果（{{filteredDevicesArr.length}}个）
+        </text>
+      </view>
+
+      <view wx:if="{{isOperation}}" class="status-modify-btn">
+        <button bindtap="toChangeStatus">修改状态</button>
+        <button bindtap="toSelectOpenTime">开放机时</button>
+      </view>
+    </view>
+
+    <!-- 设备列表 -->
+    <view class="device-list" style="margin-top: {{isOperation ? '280rpx' : (showFiltered && (searchKeyword || selectedStatus != '全部') ? '180rpx' : '120rpx')}};">
+      <view wx:if="{{filteredDevicesArr.length>0}}">
+        <view wx:for="{{filteredDevicesArr}}" wx:key="device_id" data-index="{{index}}" bindtap="{{isOperation ? 'toggleDeviceSelection' : 'toMyDeviceDetails'}}" class="device-item {{isOperation && item.selected ? 'selected' : ''}}">
+
+          <view class="image-area">
+            <image src="{{item.image_url || '/images/no-image.png'}}" mode="aspectFit" class="device-image" />
+          </view>
+
+          <view class="device-info">
+            <view class="info-row">
+              <text class="label">名称：</text>
+              <text class="value">{{item.device_name || '未知'}}</text>
+            </view>
+            <view class="info-row">
+              <text class="label">地点：</text>
+              <text class="value">{{item.location || '未知'}}</text>
+            </view>
+            <view class="info-row">
+              <text class="label">状态：</text>
+              <text class="value">{{item.status || '未知'}}</text>
+            </view>
+          </view>
+
+          <view wx:if="{{isOperation}}" class="checkbox-wrapper" data-index="{{index}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}">
+              <text wx:if="{{item.selected}}" class="checkmark">✓</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text wx:if="{{showFiltered && searchKeyword}}">未找到"{{searchKeyword}}"相关的设备</text>
+        <text wx:else>暂无设备信息</text>
+      </view>
+    </view>
+
+    <!-- 自定义底部导航栏 -->
+    <custom-tabbar current="4"></custom-tabbar>
+
+    <!-- 给底部栏留出空间 -->
+    <view class="tabbar-placeholder"></view>
+  </view>
+</view>

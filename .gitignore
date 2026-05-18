@@ -1,0 +1,55 @@
+# ===== Java / Spring Boot =====
+*/target/
+*/pom.xml.tag
+*/pom.xml.releaseBackup
+*/pom.xml.versionsBackup
+*.log
+*.class
+.idea/
+*.iml
+.mvn/
+mvnw
+mvnw.cmd
+logs/
+*.pid
+
+# ===== Vue / Node =====
+node_modules/
+dist/
+.DS_Store
+*.local
+.env
+.env.local
+.env.production
+.env.development
+
+# ===== 微信小程序 =====
+miniprogram/node_modules/
+miniprogram/.idea/
+**/project.private.config.json
+**/.project
+**/.dev
+
+# ===== IDE 配置 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== 系统文件 =====
+Thumbs.db
+*.tmp
+
+# ===== 本地配置文件（敏感信息）=====
+**/application.properties
+**/application-local.properties
+**/application-dev.properties
+**/jdbc.properties
+**/.env.local
+**/.env.*.local
+
+# ===== 图片上传目录（运行时数据，不提交）=====
+images/
+faultImages/
+**/images/
+**/faultImages/

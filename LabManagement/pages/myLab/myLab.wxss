@@ -1,0 +1,190 @@
+/* pages/myLab/myLab.wxss */
+.page-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+.container {
+  padding: 30rpx 20rpx 120rpx 20rpx;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 固定搜索栏 */
+.search-bar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #fff;
+  padding: 20rpx 20rpx 0 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  width: 100%; 
+}
+
+.search-input-wrapper {
+  flex: 1;
+  background-color: #f5f5f5;
+  border-radius: 50rpx;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  height: 40rpx;
+  line-height: 40rpx;
+  min-width: 0;
+}
+
+.status-picker {
+  background-color: #e0e0e0;
+  padding: 8rpx 20rpx;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.picker-arrow {
+  margin-left: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.clear-btn {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 32rpx;
+}
+
+.search-result-tip {
+  font-size: 26rpx;
+  color: #666;
+  padding: 20rpx 10rpx;
+  background-color: #fff;
+  margin-top: 10rpx;
+}
+
+/* 实验室列表 */
+.lab-list {
+  width: 100%;
+}
+
+.lab-item {
+  width: 90vw; 
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.image-area {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 30rpx;
+  flex-shrink: 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.lab-image {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.lab-info {
+  flex: 1;
+  margin-bottom: 0;
+  margin-right: 20rpx;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 12rpx;
+  font-size: 28rpx;
+  line-height: 1.4;
+}
+
+.info-row .label {
+  color: #666;
+  width: 100rpx;
+  flex-shrink: 0;
+}
+
+.info-row .value {
+  color: #333;
+  flex: 1;
+  font-weight: 500;
+}
+
+.button-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140rpx;
+  margin-left: 20rpx;
+}
+
+.edit-btn {
+  background-color: #007AFF;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  padding: 15rpx 0;
+  line-height: 1.4;
+  margin: 0;
+  min-width: 140rpx;
+  height: auto;
+  text-align: center;
+}
+
+.edit-btn:active {
+  background-color: #0056CC;
+  opacity: 0.8;
+}
+
+.empty {
+  text-align: center;
+  padding: 200rpx 0;
+  color: #999;
+  font-size: 32rpx;
+}
+
+.tabbar-placeholder {
+  height: 120rpx;
+}

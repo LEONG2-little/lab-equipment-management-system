@@ -1,0 +1,43 @@
+<!--pages/faultReportSelectLab/faultReportSelectLab.wxml-->
+<view class="reservation-container">
+
+<view wx:if="{{labReservationArr.length > 0}}">
+  <view wx:for="{{labReservationArr}}" wx:key="lab_reservation_id" class="reservation-item">
+    <!-- 点击区域 -->
+    <view class="info-area" bindtap="toFaultReportLabFillOut" data-index="{{index}}">
+
+      <view class="image-area">
+        <!-- 直接使用网络图片URL -->
+        <image src="{{item.lab_detail.image_url || '/images/no-image.png'}}" mode="aspectFit" class="device-image" />
+      </view>
+
+      <view class="text-info-area">
+        <view class="info-item">
+          <text class="label">实验室名称：</text>
+          <text class="value">{{item.lab_detail.laboratory_name || '未知'}}</text>
+        </view>
+
+        <view class="info-item">
+          <text class="label">使用用途：</text>
+          <text class="value">{{item.purpose || '未知'}}</text>
+        </view>
+
+        <view class="info-item">
+          <text class="label">状态：</text>
+          <text class="value">{{item.status || '未知'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:else class="empty">
+  <text>暂无预约信息</text>
+</view>
+
+<!-- 自定义底部导航栏 -->
+<custom-tabbar current="4"></custom-tabbar>
+
+<!-- 给底部栏留出空间 -->
+<view class="tabbar-placeholder"></view>
+</view>
