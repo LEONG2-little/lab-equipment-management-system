@@ -44,6 +44,7 @@ Thumbs.db
 **/application.properties
 **/application-local.properties
 **/application-dev.properties
+**/application-docker.properties
 **/jdbc.properties
 **/.env.local
 **/.env.*.local
