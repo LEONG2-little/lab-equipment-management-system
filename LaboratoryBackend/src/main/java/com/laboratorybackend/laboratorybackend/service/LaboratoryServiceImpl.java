@@ -45,7 +45,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
     //获取全部实验室数据
     @Override
-    @Cacheable(value = "laboratories", key = "'allLaboratories'", unless = "#result == null")
+    @Cacheable(value = "laboratory",key = "'allLaboratory'",unless = "#result = null")
     public ResponseObject getAllLaboratory(){
         List<Laboratory> laboratoryList = laboratoryMapper.getAllLaboratory();
 
@@ -79,7 +79,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     //修改实验室信息
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @CacheEvict(value = "laboratories", key = "'allLaboratories'")
+    @CacheEvict(value = "laboratory",key = "'allLaboratory'")
     public ResponseObject updateLaboratory(Map<String,Object> request){
 
         String newStatus = (String) request.get("status");
@@ -186,7 +186,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
     //批量添加新的实验室
     @Override
-    @CacheEvict(value = "laboratories", key = "'allLaboratories'")
+    @CacheEvict(value = "laboratory",key = "'allLaboratory'")
     public ResponseObject<List<Laboratory>> addLaboratories(List<Laboratory> laboratories){
         int successCount = 0;
         List<Laboratory> failedLaboratories = new ArrayList<>();
@@ -266,7 +266,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
     //修改实验室信息
     @Override
-    @CacheEvict(value = "laboratories", key = "'allLaboratories'")
+    @CacheEvict(value = "laboratory",key = "'allLaboratory'")
     public ResponseObject changeLabStatus(Integer lab_reservation_id, Integer laboratory_id, String status){
 
         //如果要修改状态为“闲置”

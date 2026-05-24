@@ -3,15 +3,15 @@
 
  Source Server         : MyDatabase
  Source Server Type    : MySQL
- Source Server Version : 80042 (8.0.42)
+ Source Server Version : 80046 (8.0.46)
  Source Host           : localhost:3306
  Source Schema         : laboratory
 
  Target Server Type    : MySQL
- Target Server Version : 80042 (8.0.42)
+ Target Server Version : 80046 (8.0.46)
  File Encoding         : 65001
 
- Date: 08/05/2026 18:29:36
+ Date: 24/05/2026 19:02:48
 */
 
 SET NAMES utf8mb4;
@@ -31,6 +31,11 @@ CREATE TABLE `admin`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES (1, 111, '$2a$10$8Zx.kRmPo42ft8DnMDeYfu1ziT0xE.pl9/2mCHmH3j6Cy9Gmivl8G', '正常', '2026-04-09 15:42:17');
+
+-- ----------------------------
 -- Table structure for announcement
 -- ----------------------------
 DROP TABLE IF EXISTS `announcement`;
@@ -42,7 +47,11 @@ CREATE TABLE `announcement`  (
   `publish_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   `is_top` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`announcement_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of announcement
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for device
@@ -67,7 +76,21 @@ CREATE TABLE `device`  (
   INDEX `idx_device_status`(`status` ASC) USING BTREE,
   INDEX `idx_device_lab`(`laboratory_id` ASC) USING BTREE,
   INDEX `idx_device_manager`(`manager_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of device
+-- ----------------------------
+INSERT INTO `device` VALUES (1, '紫外分光光度计', '光谱分析仪器', 'UV-2600', '2026-03-05', 58000.00, 3, '紫外分光光度计.png', '波长范围：190-1100nm，带宽：2nm', '用于物质定量分析，测量样品吸光度', '闲置', 1, 2, '2026-03-19 20:31:08');
+INSERT INTO `device` VALUES (2, '电子天平', '称量设备', 'FA2004N', '2023-08-20', 4500.00, 1, '电子天平.png', '量程：0-200g，精度：0.0001g', '高精度电子分析天平，用于精密称量', '闲置', 1, 2, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (3, '离心机', '分离设备', 'TGL-16M', '2023-10-10', 6800.00, 1, '离心机.png', '最高转速：16000rpm，最大离心力：17800×g', '高速冷冻离心机，用于样品分离', '闲置', 2, 2, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (4, 'pH计', '测量仪器', 'PHS-3C', '2024-01-05', 1200.00, 1, 'pH计.png', '测量范围：0-14pH，精度：±0.01pH', '实验室pH酸碱度测量仪', '闲置', 1, 2, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (5, '磁力搅拌器', '搅拌设备', '85-2', '2023-12-12', 800.00, 1, '磁力搅拌器.png', '搅拌容量：20-3000ml，转速：0-2600rpm', '恒温磁力搅拌器，用于溶液混合', '闲置', 1, 3, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (6, '光学显微镜', '观察设备', 'BX53', '2022-09-18', 35000.00, 2, '光学显微镜.png', '放大倍数：40-1000倍，配拍照系统', '研究级生物显微镜，用于细胞观察', '闲置', 3, 3, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (7, '示波器', '电子仪器', 'DS1104Z', '2023-11-22', 5200.00, 2, '示波器.png', '带宽：100MHz，采样率：1GSa/s', '四通道数字存储示波器', '闲置', 2, 3, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (8, '函数信号发生器', '电子仪器', 'DG1022', '2024-02-28', 2800.00, 2, '函数信号发生器.png', '频率范围：0-25MHz，输出波形：正弦、方波、三角波', '任意波形信号发生器', '闲置', 2, 4, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (9, '生物安全柜', '安全设备', 'BSC-1304IIA2', '2022-05-16', 42000.00, 3, '生物安全柜.png', '洁净等级：ISO5级，风速：0.3-0.5m/s', '二级生物安全柜，用于微生物操作', '闲置', 3, 4, '2026-03-29 23:00:08');
+INSERT INTO `device` VALUES (10, '恒温培养箱', '培养设备', 'DHP-9052', '2023-07-30', 5600.00, 3, '恒温培养箱.png', '控温范围：RT+5-65℃，温度波动：±0.5℃', '电热恒温培养箱，用于微生物培养', '闲置', 2, 4, '2026-03-29 23:00:08');
 
 -- ----------------------------
 -- Table structure for fault_report
@@ -83,7 +106,11 @@ CREATE TABLE `fault_report`  (
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`report_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fault_report
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for fault_report_lab
@@ -99,7 +126,11 @@ CREATE TABLE `fault_report_lab`  (
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态：待处理、处理中、已处理、已忽略',
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`report_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '实验室故障报告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '实验室故障报告表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of fault_report_lab
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for global_disabled_period
@@ -115,7 +146,11 @@ CREATE TABLE `global_disabled_period`  (
   `created_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`disable_id`) USING BTREE,
   INDEX `idx_time`(`start_time` ASC, `end_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of global_disabled_period
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lab_reservation
@@ -137,7 +172,11 @@ CREATE TABLE `lab_reservation`  (
   INDEX `idx_lab_status_endtime`(`status` ASC, `end_time` ASC) USING BTREE,
   INDEX `idx_lab_lab_status_time`(`laboratory_id` ASC, `status` ASC, `start_time` ASC, `end_time` ASC) USING BTREE,
   INDEX `idx_lab_user_status`(`user_id` ASC, `status` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of lab_reservation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for laboratory
@@ -157,6 +196,13 @@ CREATE TABLE `laboratory`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of laboratory
+-- ----------------------------
+INSERT INTO `laboratory` VALUES (1, '实验楼A101.png', '实验楼一层', '实验室A101', 2, '基础化学实验室，配备标准化学实验设备，可用于普通化学实验教学。', '闲置', '2026-04-21 14:16:41');
+INSERT INTO `laboratory` VALUES (2, '实验楼B202.png', '实验楼二层', '实验室B202', 2, '物理实验室，配备力学、光学、电学实验设备，可用于大学物理实验。', '闲置', '2026-04-21 14:16:41');
+INSERT INTO `laboratory` VALUES (3, '实验楼C303.png', '实验楼三层', '实验室C303', 2, '生物安全实验室，配备生物安全柜、培养箱等设备，需通过安全培训方可使用。', '闲置', '2026-04-21 14:16:41');
+
+-- ----------------------------
 -- Table structure for notification
 -- ----------------------------
 DROP TABLE IF EXISTS `notification`;
@@ -169,7 +215,11 @@ CREATE TABLE `notification`  (
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`notification_id`) USING BTREE,
   INDEX `idx_notification_user_read`(`user_id` ASC, `is_read` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of notification
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for opentime
@@ -186,7 +236,11 @@ CREATE TABLE `opentime`  (
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`openTime_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of opentime
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for permission
@@ -200,6 +254,15 @@ CREATE TABLE `permission`  (
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`permission_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of permission
+-- ----------------------------
+INSERT INTO `permission` VALUES (1, 1, 7, 3, NULL);
+INSERT INTO `permission` VALUES (2, 2, 7, 6, NULL);
+INSERT INTO `permission` VALUES (3, 3, 30, 12, NULL);
+INSERT INTO `permission` VALUES (4, 4, 30, 30, NULL);
+INSERT INTO `permission` VALUES (5, 5, NULL, 30, NULL);
 
 -- ----------------------------
 -- Table structure for reservation
@@ -221,7 +284,11 @@ CREATE TABLE `reservation`  (
   INDEX `idx_res_status_endtime`(`status` ASC, `end_time` ASC) USING BTREE,
   INDEX `idx_res_device_status_time`(`device_id` ASC, `status` ASC, `start_time` ASC, `end_time` ASC) USING BTREE,
   INDEX `idx_res_user`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of reservation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for scrap
@@ -238,7 +305,11 @@ CREATE TABLE `scrap`  (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `approved_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`scrap_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of scrap
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
@@ -257,5 +328,11 @@ CREATE TABLE `user`  (
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, 2022160085, '梁日臻', '$2a$10$Vkko5VRfMOiv8FfaiN/nr.tmfsIq2Z36paCrmeppObluzNchUecma', '学生', 1, '2022160085', 'q1551352154@gmail.com', '正常', NULL);
+INSERT INTO `user` VALUES (2, 2022999999, '李四', '$2a$10$b7w4FIQk8mIRoAxK.LAjjuhpdl05HUbXkYqNefN/y/C9fMKw9r4Yy', '教师', 4, '2', NULL, '正常', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

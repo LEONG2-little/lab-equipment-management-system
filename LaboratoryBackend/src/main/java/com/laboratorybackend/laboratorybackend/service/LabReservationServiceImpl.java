@@ -198,13 +198,13 @@ public class LabReservationServiceImpl implements LabReservationService {
     @Transactional
     public ResponseObject addLabReservation(Map<String, Object> request) {
 
-        Integer laboratory_id = (Integer) request.get("laboratory_id");
+        String laboratory_id = (String) request.get("laboratory_id");
         String start_time = (String) request.get("start_time");
-        String lockKey = "lock:laboratory:" + laboratory_id + ",time:" + start_time;
+        String lockKey = "lock:key:" + laboratory_id + ",time:" + start_time;
         String lockValue = UUID.randomUUID().toString();
-        Boolean locked = redisTemplate.opsForValue().setIfAbsent(lockKey,lockValue, Duration.ofSeconds(30));
+        Boolean locked = redisTemplate.opsForValue().setIfAbsent(lockKey,lockValue);
         if(Boolean.FALSE.equals(locked)) {
-            return new ResponseObject(409, "当前预约人数较多，请稍后重试");
+            return new ResponseObject(409, "<UNK>", null);
         }
 
         try {
@@ -330,6 +330,7 @@ public class LabReservationServiceImpl implements LabReservationService {
             String script = "if redis.call('get',KEYS[1]) == ARGV[1] then return redis.call('del',KEYS[1]) else return 0 end";
             redisTemplate.execute(new DefaultRedisScript<>(script,Long.class),List.of(lockKey),lockValue);
         }
+
     }
 
     //自动处理已经过了预约时间的实验室预约信息
